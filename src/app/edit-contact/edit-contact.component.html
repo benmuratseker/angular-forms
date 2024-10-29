@@ -49,9 +49,14 @@
       </div>
     </section>
     <div class="buttons">
+      <!-- <button *ngIf="!contactForm.submitted" class="secondary" type="button">Cancel</button>
+     <button class="primary" (click)="saveContact()">Save</button> -
+      <button *ngIf="!contactForm.submitted" class="primary" type="submit" >Save</button>
+      <button disabled *ngIf="contactForm.submitted">Saving...</button> -->
       <button class="secondary" type="button">Cancel</button>
       <!-- <button class="primary" (click)="saveContact()">Save</button> -->
       <button class="primary" type="submit" >Save</button>
+      <button class="saving" disabled>Saving...</button>
     </div>
   </form>
 </div>
