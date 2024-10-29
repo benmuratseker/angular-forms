@@ -2,10 +2,12 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <form>
+  <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm">
     <section>
       <nav>Name/Info</nav>
       <div>
+        <!-- one way binding -->
+        <input type="hidden" [ngModel]="contact.id" name="id" />
         <!-- two way binding with ngmodel inside edit-contact contact model -->
         <input placeholder="First Name" [(ngModel)]="contact.firstName" name="firstName" />
         <input placeholder="Last Name" [(ngModel)]="contact.lastName" name="lastName" />
@@ -15,7 +17,7 @@
     </section>
     <section>
       <nav>Phone</nav>
-      <div class="flex-column">
+      <div class="flex-column" ngModelGroup="phone">
         <div class="flex-group">
           <input placeholder="Phone" [(ngModel)]="contact.phone.phoneNumber" name="phoneNumber"/>
           <img src="/assets/plus-grey-blue.png" class="add" />
@@ -30,7 +32,7 @@
     <section>
       <nav>Address</nav>
       <div>
-        <div class="address">
+        <div class="address" ngModelGroup="address">
           <div class="flex-group">
             <input placeholder="Address" [(ngModel)]="contact.address.streetAddress" name="streetAddress" />
             <img src="/assets/plus-grey-blue.png" class="add" />
@@ -46,9 +48,10 @@
         </div>
       </div>
     </section>
+    <div class="buttons">
+      <button class="secondary" type="button">Cancel</button>
+      <!-- <button class="primary" (click)="saveContact()">Save</button> -->
+      <button class="primary" type="submit" >Save</button>
+    </div>
   </form>
-  <div class="buttons">
-    <button class="secondary">Cancel</button>
-    <button class="primary" (click)="saveContact()">Save</button>
-  </div>
 </div>

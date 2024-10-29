@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from '../contacts/contact.model';
+import { ContactsService } from '../contacts/contacts.service';
 
 
 @Component({
@@ -30,14 +31,25 @@ export class EditContactComponent implements OnInit {
       addressType: '',
     },
   }
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, 
+    private contactsService : ContactsService, 
+    private router : Router) { }
 
   ngOnInit() {
     const contactId = this.route.snapshot.params['id'];
     if (!contactId) return
+    this.contactsService.getContact(contactId).subscribe((contact) => {
+      console.log(this.contact);
+      if(contact)
+        this.contact = contact;
+    });
   }
 
-  saveContact() {
-    console.log(this.contact);
+  saveContact(form: NgForm) {
+    // console.log(this.contact);
+    console.log(form.value);
+    this.contactsService.saveContact(form.value).subscribe({
+      next: () => this.router.navigate(['/contacts'])
+    });
   }
 }
