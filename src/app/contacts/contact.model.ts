@@ -1,5 +1,6 @@
 export interface Contact {
   id: string,
+  personal: boolean,
   firstName: string,
   lastName: string,
   dateOfBirth: Date | null,
@@ -24,5 +25,11 @@ export interface Address {
 export const phoneTypeValues = [
   { title: 'Mobile', value: 'mobile' },
   { title: 'Work', value: 'work' },
+  { title: 'Other', value: 'other' },
+];
+
+export const addressTypeValues = [
+  { title: 'Mobile', value: 'mobile' },
   { title: 'Home', value: 'home' },
+  { title: 'Other', value: 'other' },
 ];

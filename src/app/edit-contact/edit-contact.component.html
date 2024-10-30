@@ -13,6 +13,9 @@
         <input placeholder="Last Name" [(ngModel)]="contact.lastName" name="lastName" />
         <input placeholder="Date of Birth" [(ngModel)]="contact.dateOfBirth" name="dateOfBirth" />
         <input placeholder="Favorites Ranking" [(ngModel)]="contact.favoritesRanking" name="favoritesRanking" />
+        <div>
+          <input type="checkbox" [(ngModel)]="contact.personal" name="personal" /> Personal
+        </div>
       </div>
     </section>
     <section>
@@ -45,9 +48,10 @@
           <input placeholder="State/Region" [(ngModel)]="contact.address.state" name="state" />
           <input placeholder="Zip/Postal Code" [(ngModel)]="contact.address.postalCode" name="postalCode" />
           <select [(ngModel)]="contact.address.addressType" name="addressType" >
-            <option value="home">Home</option>
+            <option *ngFor="let addressType of addressTypes" [value]="addressType.value">{{addressType.title}}</option>
+            <!-- <option value="home">Home</option>
             <option value="work">Work</option>
-            <option value="other">Other</option>
+            <option value="other">Other</option> -->
           </select>
         </div>
       </div>
