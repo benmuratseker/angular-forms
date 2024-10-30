@@ -21,7 +21,8 @@ export class EditContactComponent implements OnInit {
     personal:false,
     firstName:'',
     lastName:'',
-    dateOfBirth: null,
+    // dateOfBirth: null,
+    dateOfBirth: '',
     favoritesRanking: 0,
     phone: {
       phoneNumber: '',
