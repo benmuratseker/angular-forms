@@ -31,7 +31,7 @@ export const phoneTypeValues = [
 ];
 
 export const addressTypeValues = [
-  { title: 'Mobile', value: 'mobile' },
+  { title: 'Work', value: 'work' },
   { title: 'Home', value: 'home' },
   { title: 'Other', value: 'other' },
 ];
