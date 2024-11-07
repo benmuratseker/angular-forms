@@ -1,4 +1,4 @@
-export const profileIconName = [
+export const profileIconNames = [
 'person-01.png',
 'person-02.png',
 'person-03.png',
