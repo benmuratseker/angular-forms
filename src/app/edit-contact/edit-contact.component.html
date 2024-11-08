@@ -71,7 +71,7 @@
               [(ngModel)]="phone.phoneNumber"
               name="phoneNumber{{i}}"
             />
-            <img src="/assets/plus-grey-blue.png" class="add" />
+            <img src="/assets/plus-grey-blue.png" class="add" (click)="addPhone()" />
           </div>
           <div class="radio">
             <!-- <input type="radio" value="mobile" [(ngModel)]="contact.phone.phoneType" name="phoneType"> Mobile
