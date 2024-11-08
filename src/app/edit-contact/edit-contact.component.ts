@@ -27,10 +27,14 @@ export class EditContactComponent implements OnInit {
     // dateOfBirth: null,
     dateOfBirth: '',
     favoritesRanking: 0,
-    phone: {
+    // phone: {
+    //   phoneNumber: '',
+    //   phoneType: ''
+    // },
+    phones: [{
       phoneNumber: '',
       phoneType: ''
-    },
+    }],
     address: {
       streetAddress: '',
       city: '',
@@ -55,9 +59,12 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact(form: NgForm) {
-    // console.log(this.contact);
-    console.log(form.value);
-    this.contactsService.saveContact(form.value).subscribe({
+     console.log(this.contact);
+    //console.log(form.value);
+    // this.contactsService.saveContact(form.value).subscribe({
+    //because of duplicated phone control it sends data as repetead values instead of an array
+    //so we send contat instead of form.value
+      this.contactsService.saveContact(this.contact).subscribe({
       next: () => this.router.navigate(['/contacts'])
     });
   }

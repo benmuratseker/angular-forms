@@ -1,7 +1,5 @@
 <div class="content">
-  <h1 class="header">
-    Edit Contact
-  </h1>
+  <h1 class="header">Edit Contact</h1>
   <form (ngSubmit)="saveContact(contactForm)" #contactForm="ngForm">
     <section>
       <nav>Name/Info</nav>
@@ -10,69 +8,156 @@
         <!-- one way binding -->
         <input type="hidden" [ngModel]="contact.id" name="id" />
         <!-- two way binding with ngmodel inside edit-contact contact model -->
-        <input placeholder="First Name" [(ngModel)]="contact.firstName" required minlength="3" #firstName="ngModel" name="firstName" [class.error]="firstName.invalid && firstName.touched" />
+        <input
+          placeholder="First Name"
+          [(ngModel)]="contact.firstName"
+          required
+          minlength="3"
+          #firstName="ngModel"
+          name="firstName"
+          [class.error]="firstName.invalid && firstName.touched"
+        />
         <!-- use template field firstName defined in the input -->
         <!-- <em *ngIf="firstName.invalid && firstName.touched">Please enter a First Name</em> -->
-        <em *ngIf="firstName.errors?.['required'] && firstName.touched">Please enter a First Name</em>
-        <em *ngIf="firstName.errors?.['minlength'] && firstName.touched">First Name must be at least 3 characters</em>
-        <input placeholder="Last Name" [(ngModel)]="contact.lastName" name="lastName" />
-        <input placeholder="Date of Birth" [(ngModel)]="contact.dateOfBirth" name="dateOfBirth" />
+        <em *ngIf="firstName.errors?.['required'] && firstName.touched"
+          >Please enter a First Name</em
+        >
+        <em *ngIf="firstName.errors?.['minlength'] && firstName.touched"
+          >First Name must be at least 3 characters</em
+        >
+        <input
+          placeholder="Last Name"
+          [(ngModel)]="contact.lastName"
+          name="lastName"
+        />
+        <input
+          placeholder="Date of Birth"
+          [(ngModel)]="contact.dateOfBirth"
+          name="dateOfBirth"
+        />
         <!-- <input type="number" placeholder="Favorites Ranking" [(ngModel)]="contact.favoritesRanking" name="favoritesRanking" /> -->
-         <div>
-          <span>Favourites Ranking</span>
-          <input type="range" min="0" max="5" placeholder="Favorites Ranking" [(ngModel)]="contact.favoritesRanking" name="favoritesRanking" />
-          <span>{{contact.favoritesRanking}}</span>
-         </div>
-        
         <div>
-          <input type="checkbox" [(ngModel)]="contact.personal" name="personal" /> Personal
+          <span>Favourites Ranking</span>
+          <input
+            type="range"
+            min="0"
+            max="5"
+            placeholder="Favorites Ranking"
+            [(ngModel)]="contact.favoritesRanking"
+            name="favoritesRanking"
+          />
+          <span>{{ contact.favoritesRanking }}</span>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            [(ngModel)]="contact.personal"
+            name="personal"
+          />
+          Personal
         </div>
       </div>
     </section>
     <section>
-      <nav>Phone</nav>
+      <!-- <nav>Phone</nav> -->
+      <nav>Phones</nav>
+      <!-- <div class="flex-column" ngModelGroup="phone"> -->
       <div class="flex-column" ngModelGroup="phone">
-        <div class="flex-group">
-          <input placeholder="Phone" [(ngModel)]="contact.phone.phoneNumber" name="phoneNumber"/>
-          <img src="/assets/plus-grey-blue.png" class="add" />
-        </div>
-        <div class="radio">
-          <!-- <input type="radio" value="mobile" [(ngModel)]="contact.phone.phoneType" name="phoneType"> Mobile
+        <div *ngFor="let phone of contact.phones; let i  = index" class="flex-column">
+          <div class="flex-group">
+            <input
+              placeholder="Phone"
+              [(ngModel)]="phone.phoneNumber"
+              name="phoneNumber{{i}}"
+            />
+            <img src="/assets/plus-grey-blue.png" class="add" />
+          </div>
+          <div class="radio">
+            <!-- <input type="radio" value="mobile" [(ngModel)]="contact.phone.phoneType" name="phoneType"> Mobile
           <input type="radio" value="work" [(ngModel)]="contact.phone.phoneType" name="phoneType"> Work
           <input type="radio" value="other" [(ngModel)]="contact.phone.phoneType" name="phoneType"> Other -->
-          <span *ngFor="let phoneType of phoneTypes">
-            <input type="radio" [value]="phoneType.value" [(ngModel)]="contact.phone.phoneType" name="phoneType">
-            {{phoneType.title}}
-          </span>
+            <span *ngFor="let phoneType of phoneTypes">
+              <input
+                type="radio"
+                [value]="phoneType.value"
+                [(ngModel)]="phone.phoneType"
+                name="phoneType{{i}}"
+              />
+              {{ phoneType.title }}
+            </span>
+          </div>
         </div>
       </div>
     </section>
     <section>
       <nav>Address</nav>
       <div>
-        <div class="address" ngModelGroup="address" #addressGroup="ngModelGroup" [class.error]="addressGroup.invalid && addressGroup.dirty">
+        <div
+          class="address"
+          ngModelGroup="address"
+          #addressGroup="ngModelGroup"
+          [class.error]="addressGroup.invalid && addressGroup.dirty"
+        >
           <div class="flex-group">
-            <input placeholder="Address" [(ngModel)]="contact.address.streetAddress" name="streetAddress" required />
+            <input
+              placeholder="Address"
+              [(ngModel)]="contact.address.streetAddress"
+              name="streetAddress"
+              required
+            />
             <img src="/assets/plus-grey-blue.png" class="add" />
           </div>
-          <input placeholder="City" [(ngModel)]="contact.address.city" name="city" required />
-          <input placeholder="State/Region" [(ngModel)]="contact.address.state" name="state" required />
-          <input placeholder="Zip/Postal Code" [(ngModel)]="contact.address.postalCode" name="postalCode" required />
-          <select [(ngModel)]="contact.address.addressType" name="addressType" >
-            <option *ngFor="let addressType of addressTypes" [value]="addressType.value">{{addressType.title}}</option>
+          <input
+            placeholder="City"
+            [(ngModel)]="contact.address.city"
+            name="city"
+            required
+          />
+          <input
+            placeholder="State/Region"
+            [(ngModel)]="contact.address.state"
+            name="state"
+            required
+          />
+          <input
+            placeholder="Zip/Postal Code"
+            [(ngModel)]="contact.address.postalCode"
+            name="postalCode"
+            required
+          />
+          <select [(ngModel)]="contact.address.addressType" name="addressType">
+            <option
+              *ngFor="let addressType of addressTypes"
+              [value]="addressType.value"
+            >
+              {{ addressType.title }}
+            </option>
             <!-- <option value="home">Home</option>
             <option value="work">Work</option>
             <option value="other">Other</option> -->
           </select>
         </div>
-        <em *ngIf="addressGroup.invalid && addressGroup.dirty">Incomplete Address</em>
-      </div> 
+        <em *ngIf="addressGroup.invalid && addressGroup.dirty"
+          >Incomplete Address</em
+        >
+      </div>
     </section>
     <section>
       <nav>Notes</nav>
       <div>
-        <textarea placeholder="Notes" rows="3" [(ngModel)]="contact.notes" name="notes" #notes="ngModel" [restrictedWords]="['foo', 'boo']" [class.error]="notes.invalid"></textarea>
-        <em *ngIf="notes.errors?.['restrictedWords']">Restricted words found: {{ notes.errors?.['restrictedWords']}}</em>
+        <textarea
+          placeholder="Notes"
+          rows="3"
+          [(ngModel)]="contact.notes"
+          name="notes"
+          #notes="ngModel"
+          [restrictedWords]="['foo', 'boo']"
+          [class.error]="notes.invalid"
+        ></textarea>
+        <em *ngIf="notes.errors?.['restrictedWords']"
+          >Restricted words found: {{ notes.errors?.['restrictedWords']}}</em
+        >
       </div>
     </section>
     <div class="buttons">
@@ -82,7 +167,9 @@
       <button disabled *ngIf="contactForm.submitted">Saving...</button> -->
       <button class="secondary" type="button">Cancel</button>
       <!-- <button class="primary" (click)="saveContact()">Save</button> -->
-      <button class="primary" type="submit" [disabled]="contactForm.invalid" >Save</button>
+      <button class="primary" type="submit" [disabled]="contactForm.invalid">
+        Save
+      </button>
       <button class="saving" disabled>Saving...</button>
     </div>
   </form>
